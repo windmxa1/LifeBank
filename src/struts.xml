@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="default" extends="struts-default" namespace="/">
+
+	</package>
+
+	<package name="global1" extends="json-default">
+		<interceptors>
+			<interceptor name="authority" class="org.filter.AuthInterceptor1" />
+			<interceptor-stack name="mydefault">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="authority"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="mydefault" />
+		<global-results>
+			<result type="json" name="error">
+				<param name="root">result</param>
+			</result>
+		</global-results>
+	</package>
+
+	<package name="login" extends="json-default" namespace="/">
+		<action name="loginWeb" class="org.action.UserAction" method="login">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+	</package>
+	<package name="backServer" extends="json-default,global1" namespace="/">
+		<!-- 
+		<action name="test" class="org.action.TestAction"
+			method="test">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		 -->
+		<!-- UserAction -->
+		<!-- 统计每个月份的用户增长 -->
+		<action name="userIncrease" class="org.action.UserAction"
+			method="userIncrease">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 获取用户总数 -->
+		<action name="userCount" class="org.action.UserAction" method="getUserCount">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="userlist" class="org.action.UserAction">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="addUser" class="org.action.UserAction" method="addUser">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="addSuper" class="org.action.UserAction" method="addSuper">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="searchUser" class="org.action.UserAction" method="searchUser">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="Suserlist" class="org.action.UserAction" method="getSuperList">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="delUser" class="org.action.UserAction" method="delUser">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="delUsers" class="org.action.UserAction" method="delUsers">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="delSuper" class="org.action.UserAction" method="delSuper">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="editSuper" class="org.action.UserAction" method="editSuper">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<!-- ####################CellAction############################# -->
+		<!-- 获取数据总数 -->
+		<action name="getCount" class="org.action.CellAction" method="getCount">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 获取总页数 -->
+		<action name="getPageCount" class="org.action.CellAction"
+			method="getPageCount">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 获取所有罐体的历史记录 -->
+		<action name="getCellHistory" class="org.action.CellAction"
+			method="getCellHistory">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 清除获取罐体数据传递的日期缓存 -->
+		<action name="clearSession" class="org.action.CellAction"
+			method="clearSession">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 删除单个item，传入参数itemid -->
+		<action name="deleteItem" class="org.action.CellAction" method="deleteItem">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 删除所有选中的item数据，传入json数组或者itemids数组 -->
+		<action name="deleteItems" class="org.action.CellAction"
+			method="deleteItems">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 用户存放了新细胞，需要添加细胞信息以及关联信息,传入参数phone,name细胞名,num细胞数,serial罐体序列号 -->
+		<action name="addCell" class="org.action.CellAction" method="addCell">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 删除干细胞 -->
+		<action name="delCells" class="org.action.CellAction" method="delCells">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 获取干细胞总数 -->
+		<action name="getCellCount" class="org.action.CellAction"
+			method="getCellCount">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 获取存储的所有干细胞列表 -->
+		<action name="getCellList" class="org.action.CellAction"
+			method="getCellList">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 删除某段时间内的历史记录，按月份为单位，传入两个时间字符串，起始和结束 -->
+		<action name="deleteHistoryByPeriod" class="org.action.CellAction"
+			method="deleteHistoryByPeriod">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- ####################CanAction############################# -->
+		<action name="getCanPage" class="org.action.CanAction" method="getCanPage">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCanCount" class="org.action.CanAction" method="getCanCount">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 获取罐体列表 -->
+		<action name="getCans" class="org.action.CanAction">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 添加罐体信息 传入参数Serial，Address -->
+		<action name="addCan" class="org.action.CanAction" method="addCan">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 修改罐体信息 传入参数canid,Serial，Address -->
+		<action name="updateCan" class="org.action.CanAction" method="updateCan">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<!-- 删除罐体 -->
+		<action name="delCan" class="org.action.CanAction" method="delCan">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<!-- 删除多个罐体 -->
+		<action name="delCans" class="org.action.CanAction" method="delCans">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+
+		<!-- #####################MMangeAction############################## -->
+		<!-- 显示所有的话题但不显示评论和回复 -->
+		<action name="getAllInfo" class="org.action.MMangeAction">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<!-- 点击话题查看评论 传入参数topicId -->
+		<action name="getCommentsByTopic" class="org.action.MMangeAction"
+			method="getCommentsByTopic">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 点击评论查看回复 传入参数commentId -->
+		<action name="getReplysByComment" class="org.action.MMangeAction"
+			method="getReplysByComment">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<!-- 删除话题 传入参数topicId -->
+		<action name="delTopic1" class="org.action.MMangeAction"
+			method="delTopic">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<!-- 删除评论 传入参数commentId -->
+		<action name="delComment1" class="org.action.MMangeAction"
+			method="delComment">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<!-- 删除回复 传入参数replyId -->
+		<action name="delReply1" class="org.action.MMangeAction"
+			method="delReply">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+		<action name="getComRep1" class="org.action.MMangeAction"
+			method="getComRep">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+
+		</action>
+	</package>
+	<!-- APP界面维护模块 -->
+	
+	<constant name="struts.multipart.maxSize" value="62914560" />
+	<!-- APP界面维护模块 -->
+	<constant name="struts.action.excludePattern" value="/jsp/.*" /><!-- 
+		不拦截jsp页面 -->
+	<package name="activeApp_backServer" extends="json-default,global1"
+		namespace="/">
+		<action name="delete" class="org.action.IndustryDynamicAction"
+			method="delete"> 			<!-- 删除 industry_dynamic表数据 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="saveActive" class="org.action.IndustryDynamicAction"
+			method="saveActive">			<!-- APP界面动态维护 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="publishArticle" class="org.action.IndustryDynamicAction"
+			method="publishArticle">
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+
+		<action name="replaceWeb" class="org.action.IndustryDynamicAction"
+			method="replaceWeb">			<!-- 1.APP首页上的几张轮换图片替换 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>		
+		<action name="expertTeamWeb" class="org.action.IndustryDynamicAction"
+			method="expertTeamWeb">			<!-- 4.专家团队：图片头像替换，内容替换 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>	
+
+		<action name="industryNewsWeb" class="org.action.IndustryDynamicAction"
+			method="industryNewsWeb">			<!-- 6.行业新闻动态 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="theScrollBarWeb" class="org.action.IndustryDynamicAction"
+			method="theScrollBarWeb">			<!-- 7滚动条 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="clinicalCaseWeb" class="org.action.IndustryDynamicAction"
+			method="clinicalCaseWeb">			<!-- 9.临床案例 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="publicClassWeb" class="org.action.IndustryDynamicAction"
+			method="publicClassWeb">			<!-- 10.公开课 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+
+		<action name="healthKnowledgeWeb" class="org.action.IndustryDynamicAction"
+			method="healthKnowledgeWeb">			<!-- 11.健康小知识 -->
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+	</package>
+
+</struts>
